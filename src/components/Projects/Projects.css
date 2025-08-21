@@ -1,0 +1,206 @@
+/* base section */
+#projects {
+  width: 100%;
+  min-height: 100vh;
+  padding: 56px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  color: #e6eef2;
+  position: relative;
+  overflow: hidden;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* decorative low-contrast orbs */
+#projects::before,
+#projects::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+#projects::before {
+  width: 360px;
+  height: 360px;
+  top: -80px;
+  left: -80px;
+  background: linear-gradient(135deg, rgba(255,132,122,0.9), rgba(255,202,101,0.9));
+}
+#projects::after {
+  width: 360px;
+  height: 360px;
+  bottom: -80px;
+  right: -80px;
+  background: linear-gradient(135deg, rgba(79,209,197,0.9), rgba(136,180,255,0.9));
+}
+
+/* heading */
+#projects h1 {
+  font-size: 3.5vmax;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  z-index: 2;
+  background: linear-gradient(to right, rgb(56, 142, 222), rgb(211, 192, 192));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  position: relative;            
+  z-index: 5;                    
+  -webkit-text-fill-color: transparent; 
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+/* ---------- 2x2 grid ---------- */
+.projects-grid-2x2 {
+  width: 64%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: auto;
+  gap: 26px;
+  align-items: start;
+  z-index: 2;
+  margin: 0 auto; /* ✅ added: center grid container */
+}
+
+/* wrapper holds perspective for inner card transforms */
+.card-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: visible;
+  transition: box-shadow 0.18s ease;
+  will-change: transform, opacity;
+  z-index: 2;
+  perspective: 1000px; /* enables 3D tilt on inner */
+  width: fit-content;
+}
+
+/* inner element receives rotations & scale */
+.card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(.2,.9,.2,1), box-shadow 0.25s ease;
+  border-radius: inherit;
+  overflow: hidden;
+  background: transparent;
+  display: block;
+}
+
+/* subtle glass overlay applied by wrapper pseudo-element */
+.card-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 6px 18px rgba(2,8,23,0.45);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ensure Card content sits above overlay */
+.card-wrapper > .card-inner > * {
+  position: relative;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+/* hover / focus elevation (use transform of inner for lift) */
+.card-wrapper:hover .card-inner,
+.card-wrapper:focus-within .card-inner {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 28px 56px rgba(2, 8, 23, 0.55);
+  z-index: 5;
+}
+
+/* responsive: stack on small screens (disable tilt shift) */
+@media (max-width: 1024px) {
+  /* ✅ added: tablet adjustment */
+  .projects-grid-2x2 {
+    width: 90%; /* wider on tablet */
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 750px) {
+  #projects {
+    padding: 40px 16px;
+  }
+
+  #projects h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* ✅ added: scale heading */
+    margin-bottom: 1.5rem; /* ✅ added: breathing space below heading */
+  }
+
+  .projects-grid-2x2 {
+    width: 100%; /* ✅ updated: full width */
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 8px; /* ✅ added: side padding to prevent edge touch */
+  }
+
+  .card-wrapper {
+    perspective: none;
+    margin: 0 auto; /* ✅ added: center cards */
+  }
+
+  .card-inner {
+    transition: transform 0.28s ease;
+  }
+
+  .card-wrapper:hover .card-inner,
+  .card-wrapper:focus-within .card-inner {
+    transform: none;
+    box-shadow: 0 18px 36px rgba(2,8,23,0.36);
+  }
+}
+
+/* accessibility focus ring */
+.card-wrapper:focus {
+  box-shadow: 0 36px 80px rgba(2, 8, 23, 0.7), 0 0 0 4px rgba(100, 180, 255, 0.12);
+}
+
+/* ultra-wide tweak */
+@media (min-width: 1600px) {
+  .projects-grid-2x2 {
+    gap: 36px;
+  }
+}
+
+@media (max-width: 360px) {
+  #projects h1 {
+    font-size: 1.4rem;
+  }
+  .projects-grid-2x2 {
+    gap: 12px;
+    padding: 0 6px;
+  }
+}
+
+
+/* Tablet: 601px – 1024px → 2 columns, narrower width */
+@media (max-width: 1024px) and (min-width: 601px) {
+  .projects-grid-2x2 {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: ≤600px → 1 column */
+@media (max-width: 600px) {
+  .projects-grid-2x2 {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 8px;
+    justify-content: center;
+  }
+}
+

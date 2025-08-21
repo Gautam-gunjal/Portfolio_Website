@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap');
+
+#home {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+
+    padding: 2vmax;
+    position: relative;
+    overflow: hidden;
+    background-size: 200% 200%;
+}
+
+.lefthome {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    z-index: 2;
+}
+
+.righthome {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.image-container {
+    position: relative;
+    width: 450px;       /* adjust size */
+    height: 450px;
+    border-radius: 50%; /* makes it circular */
+    overflow: hidden;   /* hides image overflow outside circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(0, 230, 255, 0.1), transparent);
+    box-shadow: 0 0 40px rgba(0, 230, 255, 0.3);
+    background-color: aliceblue;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* keeps image inside circle */
+}
+
+.righthome img {
+    width: 100%;
+    max-width: 500px;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6));
+    transform: scale(1);
+    transition: transform 0.4s ease, filter 0.4s ease;
+    z-index: 2;
+}
+
+.righthome img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.8));
+}
+
+.glow-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 230, 255, 0.2) 0%, rgba(0, 230, 255, 0) 70%);
+    animation: pulse 4s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 0.3;
+    }
+}
+
+.L_homedetails {
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    font-family: 'Montserrat', sans-serif;
+    max-width: 80%;
+}
+
+.line1 {
+    font-size: 0.9em;
+    color: #00e6ff;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.line1 .wave {
+    animation: wave 2s infinite;
+    display: inline-block;
+    transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(-10deg); }
+    20% { transform: rotate(12deg); }
+    30% { transform: rotate(-10deg); }
+    40% { transform: rotate(9deg); }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.line2 {
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: bold;
+    background: linear-gradient(white,cyan);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: monospace;
+    letter-spacing: 1.5px;
+    margin: 0.5rem 0;
+    background-size: 200% auto;
+    animation: gradientShift 3s linear infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.line3 {
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    color: #00e6ff;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.line4 {
+    font-size: 1.2em;
+    background:linear-gradient( white,rgb(71, 64, 64));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    margin: 1rem 0 2rem;
+    background-size: 200% auto;
+}
+
+.cta-button {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.8rem;
+    font-size: 0.6em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2rem;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 198, 255, 0.6);
+}
+
+.cta-button:hover .arrow {
+    transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    #home {
+        flex-direction: column;
+        height: auto;
+        padding: 4rem 2vmax;
+    }
+    
+    .lefthome, .righthome {
+        width: 100%;
+        height: auto;
+    }
+    
+    .righthome {
+        margin-top: 2rem;
+    }
+    
+    .L_homedetails {
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .line1 {
+        justify-content: center;
+    }
+    
+    .cta-button {
+        margin: 2rem auto 0;
+    }
+}
+
+.description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 1rem 0 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+@media (max-width: 750px) {
+  .passion-description {
+    text-align: center;
+    max-width: 100%;
+  }
+}
