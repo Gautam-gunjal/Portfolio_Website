@@ -87,7 +87,7 @@ export const Home = () => {
           <p className='description'>
             I specialize in building responsive, user-friendly websites
             using modern technologies like React.js, Node.js, and Express.          </p>
-          <button className="cta-button" onClick={() => window.open("https://drive.google.com/file/d/1ZSgs2WCqWs0QdV1u_1l4hGYB0GmqQwYm/view?usp=drivesdk", "_blank", "noopener noreferrer")}>
+          <button className="cta-button" onClick={() => window.open("https://drive.google.com/file/d/1lAcyCtk65E3BCANOmLfqIS8_7BPkkso8/view?usp=drivesdk", "_blank", "noopener noreferrer")}>
             Check Resume
           </button>
         </div>
