@@ -122,6 +122,9 @@ const Skills = () => {
           case 'others':
             startY = 30;
             break;
+          default:
+            // fallback (no-op) to satisfy ESLint default-case rule
+            break;
         }
 
         gsap.from(row, {
