@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import a1 from "../../assets/AI-Code-Review.png.webp";
 import r1 from "../../assets/images.jpg";
 import c1 from "../../assets/DALL·E-2023-11-23-18.37.12-A-vector-art-landscape-image-depicting-the-concept-of-AI-in-gaming.-The-scene-includes-various-classic-game-pieces-such-as-chess-pieces-poker-cards-.png";
-import e1 from "../../assets/Employee-Management-System.png";
+import e1 from "../../assets/excel analysis.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -207,11 +207,11 @@ const Project = () => {
         >
           <div className="card-inner">
             <Card
-              title="Employee Management System"
+              title="Excel Analytics Platform"
               image={e1}
-              description="• Developed a full-stack employee record management system using the MERN stack, enabling efficient CRUD operations."
+              description="• Built an Excel Analytics Platform (MERN) that ingests spreadsheets, normalizes data, runs automated analyses, and presents interactive dashboards and exportable reports."
               technologies={["MongoDB", "Express.js", "React.js", "Node.js"]}
-              liveLink="https://github.com/Gautam-gunjal/Employee-Management-System"
+              liveLink="https://github.com/Gautam-gunjal/excel-analytics-platform"
             />
           </div>
         </div>

@@ -1,0 +1,766 @@
+/* Skills.css - Enhanced UI with professional animations (hover movement removed) */
+
+.skills-section.portfolio-skills {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --card-gradient: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  --accent-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  padding: clamp(2.5rem, 6vw, 6rem) clamp(1rem, 4vw, 2rem);
+  min-height: 100vh;
+  min-height: 100dvh; /* For mobile browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Animated gradient border effect for section */
+.skills-section.portfolio-skills::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(102, 126, 234, 0.05) 25%,
+    rgba(118, 75, 162, 0.05) 75%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  pointer-events: none;
+}
+
+/* Title with animated gradient text */
+.skills-section.portfolio-skills .skills-title {
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: clamp(1.5rem, 5vw, 4rem);
+  position: relative;
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    #667eea,
+    #764ba2,
+    #f093fb,
+    #f5576c,
+    #667eea
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite;
+  padding: 0.5rem clamp(1rem, 4vw, 2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.skills-section.portfolio-skills .skills-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(60px, 15vw, 120px);
+  height: 4px;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Grid container with staggered animation */
+.skills-section.portfolio-skills .skills-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(0.5rem, 2vw, 2rem);
+  perspective: 1000px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Enhanced card design with glass morphism */
+.skills-section.portfolio-skills .skills-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: clamp(12px, 2vw, 24px);
+  padding: clamp(1rem, 2.5vw, 2rem);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Animated gradient border */
+.skills-section.portfolio-skills .skills-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(102, 126, 234, 0.4),
+    rgba(118, 75, 162, 0.4),
+    transparent
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.skills-section.portfolio-skills .skills-card:hover::before {
+  opacity: 1;
+}
+
+/* Card header with icon */
+.skills-section.portfolio-skills .skills-card h3 {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: clamp(0.75rem, 2.5vw, 1.5rem);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+  line-height: 1.3;
+  width: 100%;
+}
+
+.skills-section.portfolio-skills .skills-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: clamp(30px, 8vw, 60px);
+  height: 3px;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.skills-section.portfolio-skills .skills-card:hover h3::after {
+  width: clamp(40px, 12vw, 100px);
+}
+
+/* Frontend specific styling */
+.skills-section.portfolio-skills .skills-card.left h3 {
+  color: #60a5fa;
+}
+
+/* Backend specific styling */
+.skills-section.portfolio-skills .skills-card.right h3 {
+  color: #34d399;
+}
+
+/* Others specific styling */
+.skills-section.portfolio-skills .skills-card.others h3 {
+  color: #f472b6;
+}
+
+/* Skills list */
+.skills-section.portfolio-skills .skills-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.4rem, 1.2vw, 0.75rem);
+  flex: 1;
+  width: 100%;
+}
+
+/* Enhanced skill item with floating effect */
+.skills-section.portfolio-skills .skill-row {
+  padding: clamp(0.4rem, 1.2vw, 0.75rem) clamp(0.6rem, 1.5vw, 1.25rem);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: clamp(6px, 1.2vw, 12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  cursor: default;
+  transform: translateY(0);
+  min-height: 40px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.skills-section.portfolio-skills .skill-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary-gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+/* Icon inside skill chip */
+.skills-section.portfolio-skills .skill-icon {
+  width: clamp(14px, 3vw, 20px);
+  height: clamp(14px, 3vw, 20px);
+  flex: 0 0 auto;
+  margin-right: clamp(0.3rem, 0.8vw, 0.6rem);
+  display: inline-block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+/* Removed hover movement: transform set to none (no translate) */
+.skills-section.portfolio-skills .skill-row:hover {
+  transform: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border-color: transparent;
+}
+
+.skills-section.portfolio-skills .skill-row:hover::before {
+  opacity: 0.3;
+}
+
+.skills-section.portfolio-skills .skill-name {
+  font-size: clamp(0.7rem, 2.2vw, 0.95rem);
+  font-weight: 500;
+  color: #e5e7eb;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 1;
+  line-height: 1.2;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  flex: 1;
+  min-width: 0; /* Prevents text overflow */
+}
+
+/* Removed hover movement: no translate on card hover; box-shadow and glow retained */
+.skills-section.portfolio-skills .skills-card:hover {
+  transform: none;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    var(--accent-glow);
+  animation: none;
+}
+
+/* ================================================
+   RESPONSIVE BREAKPOINTS - IMPROVED
+================================================ */
+
+/* Ultra-wide screens (2000px and above) */
+@media (min-width: 2000px) {
+  .skills-section.portfolio-skills .skills-container {
+    max-width: 1800px;
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    min-height: 350px;
+  }
+  
+  .skills-section.portfolio-skills .skill-row {
+    min-height: 60px;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .skills-section.portfolio-skills .skill-icon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .skills-section.portfolio-skills .skill-name {
+    font-size: 1rem;
+  }
+}
+
+/* Large Tablets and Small Laptops (1024px - 769px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .skills-section.portfolio-skills .skills-container {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+  }
+  
+  .skills-section.portfolio-skills .skills-card.others {
+    grid-column: span 2;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .skills-section.portfolio-skills .skills-card.others ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Tablets and Large Mobile (768px - 601px) */
+@media (max-width: 768px) {
+  .skills-section.portfolio-skills {
+    padding: clamp(2rem, 5vw, 4rem) clamp(0.75rem, 3vw, 1.5rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-container {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    gap: clamp(1.25rem, 4vw, 1.75rem);
+    padding: 0.5rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    min-height: auto;
+    overflow: visible;
+    padding: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-card.others {
+    grid-column: span 1;
+    max-width: 100%;
+  }
+  
+  .skills-section.portfolio-skills .skills-card ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.4rem, 1.5vw, 0.6rem);
+  }
+  
+  .skills-section.portfolio-skills .skill-row {
+    min-height: 40px;
+    padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(0.6rem, 1.5vw, 1rem);
+  }
+  
+  .skills-section.portfolio-skills .skill-name {
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    line-height: 1.3;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+  
+  .skills-section.portfolio-skills .skill-icon {
+    width: clamp(14px, 3.5vw, 18px);
+    height: clamp(14px, 3.5vw, 18px);
+    margin-right: 0.5rem;
+  }
+}
+
+/* Mobile Phones (600px - 481px) */
+@media (max-width: 600px) {
+  .skills-section.portfolio-skills {
+    padding: clamp(1.5rem, 4vw, 3rem) clamp(0.5rem, 2vw, 1rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    margin-bottom: clamp(1.25rem, 4vw, 2.5rem);
+    padding: 0.5rem 1rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-title::after {
+    height: 3px;
+    bottom: -0.4rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-container {
+    padding: 0.25rem;
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    padding: clamp(0.8rem, 2.5vw, 1.2rem);
+    border-radius: clamp(10px, 2vw, 16px);
+  }
+  
+  .skills-section.portfolio-skills .skills-card h3 {
+    font-size: clamp(1rem, 3.5vw, 1.3rem);
+    margin-bottom: clamp(0.6rem, 2vw, 1rem);
+    padding-bottom: 0.4rem;
+  }
+  
+  .skills-section.portfolio-skills .skill-row {
+    min-height: 38px;
+    padding: clamp(0.45rem, 1.2vw, 0.6rem) clamp(0.5rem, 1.2vw, 0.8rem);
+  }
+  
+  .skills-section.portfolio-skills .skill-name {
+    font-size: clamp(0.7rem, 2.8vw, 0.85rem);
+    line-height: 1.2;
+  }
+  
+  .skills-section.portfolio-skills .skill-icon {
+    width: clamp(12px, 3vw, 16px);
+    height: clamp(12px, 3vw, 16px);
+    margin-right: 0.4rem;
+  }
+}
+
+/* Small Mobile Phones (480px - 376px) */
+@media (max-width: 480px) {
+  .skills-section.portfolio-skills {
+    padding: clamp(1.25rem, 3.5vw, 2.5rem) clamp(0.5rem, 1.5vw, 0.75rem);
+    min-height: auto;
+  }
+  
+  .skills-section.portfolio-skills .skills-title {
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+    margin-bottom: clamp(1rem, 3.5vw, 2rem);
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-container {
+    gap: clamp(0.8rem, 2.5vw, 1.25rem);
+    padding: 0;
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    padding: clamp(0.7rem, 2vw, 1rem);
+    border-radius: clamp(8px, 1.5vw, 12px);
+    min-height: auto;
+  }
+  
+  .skills-section.portfolio-skills .skills-card ul {
+    grid-template-columns: 1fr;
+    gap: clamp(0.35rem, 1vw, 0.5rem);
+  }
+  
+  .skills-section.portfolio-skills .skill-row {
+    min-height: 36px;
+    padding: clamp(0.4rem, 1vw, 0.55rem) clamp(0.45rem, 1vw, 0.7rem);
+  }
+  
+  .skills-section.portfolio-skills .skill-name {
+    font-size: clamp(0.68rem, 2.5vw, 0.8rem);
+  }
+  
+  .skills-section.portfolio-skills .skill-icon {
+    width: clamp(11px, 2.8vw, 15px);
+    height: clamp(11px, 2.8vw, 15px);
+    margin-right: 0.35rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-card h3 {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+}
+
+/* Extra Small Mobile Phones (375px and below) */
+@media (max-width: 375px) {
+  .skills-section.portfolio-skills {
+    padding: clamp(1rem, 3vw, 2rem) clamp(0.4rem, 1.2vw, 0.6rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-title {
+    font-size: clamp(1.3rem, 4.5vw, 1.7rem);
+    margin-bottom: clamp(0.8rem, 3vw, 1.5rem);
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-container {
+    gap: clamp(0.7rem, 2vw, 1rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    padding: clamp(0.6rem, 1.8vw, 0.9rem);
+    border-radius: clamp(6px, 1.2vw, 10px);
+  }
+  
+  .skills-section.portfolio-skills .skill-row {
+    min-height: 34px;
+    padding: clamp(0.35rem, 0.9vw, 0.5rem) clamp(0.4rem, 0.9vw, 0.6rem);
+  }
+  
+  .skills-section.portfolio-skills .skill-name {
+    font-size: clamp(0.65rem, 2.2vw, 0.75rem);
+    line-height: 1.1;
+  }
+  
+  .skills-section.portfolio-skills .skill-icon {
+    width: clamp(10px, 2.5vw, 14px);
+    height: clamp(10px, 2.5vw, 14px);
+    margin-right: 0.3rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-card h3 {
+    font-size: clamp(0.85rem, 2.8vw, 1rem);
+    padding-bottom: 0.3rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-card h3::after {
+    height: 2px;
+  }
+}
+
+/* Super Small Mobile Phones (320px and below) */
+@media (max-width: 320px) {
+  .skills-section.portfolio-skills {
+    padding: 0.8rem 0.4rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0.5rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-container {
+    gap: 0.7rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .skills-section.portfolio-skills .skill-row {
+    min-height: 32px;
+    padding: 0.35rem 0.5rem;
+  }
+  
+  .skills-section.portfolio-skills .skill-name {
+    font-size: 0.7rem;
+  }
+  
+  .skills-section.portfolio-skills .skill-icon {
+    width: 12px;
+    height: 12px;
+    margin-right: 0.3rem;
+  }
+  
+  .skills-section.portfolio-skills .skills-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+}
+
+/* Landscape Mode for Mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .skills-section.portfolio-skills {
+    min-height: auto;
+    padding: clamp(1.5rem, 4vh, 2.5rem) clamp(0.5rem, 2vw, 1rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.6rem, 1.5vw, 1rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    min-height: 220px;
+    padding: clamp(0.6rem, 1.5vw, 1rem);
+  }
+  
+  .skills-section.portfolio-skills .skills-card ul {
+    grid-template-columns: 1fr;
+  }
+  
+  .skills-section.portfolio-skills .skill-row {
+    padding: 0.35rem 0.6rem;
+    min-height: 32px;
+  }
+  
+  .skills-section.portfolio-skills .skill-name {
+    font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+  }
+  
+  .skills-section.portfolio-skills .skill-icon {
+    width: clamp(10px, 2vw, 14px);
+    height: clamp(10px, 2vw, 14px);
+  }
+}
+
+/* Loading animation for cards */
+@keyframes card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* card appear animation retained (not hover-related) */
+.skills-section.portfolio-skills.show .skills-card {
+  animation: card-appear 0.6s ease-out forwards;
+}
+
+.skills-section.portfolio-skills.show .skills-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.skills-section.portfolio-skills.show .skills-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.skills-section.portfolio-skills.show .skills-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Skill items appear animation */
+@keyframes skill-appear {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.skills-section.portfolio-skills .skill-row {
+  animation: skill-appear 0.4s ease-out forwards;
+  animation-fill-mode: both;
+}
+
+/* Staggered animation for skill items */
+.skills-section.portfolio-skills .skills-card ul li:nth-child(1) { animation-delay: 0.1s; }
+.skills-section.portfolio-skills .skills-card ul li:nth-child(2) { animation-delay: 0.15s; }
+.skills-section.portfolio-skills .skills-card ul li:nth-child(3) { animation-delay: 0.2s; }
+.skills-section.portfolio-skills .skills-card ul li:nth-child(4) { animation-delay: 0.25s; }
+.skills-section.portfolio-skills .skills-card ul li:nth-child(5) { animation-delay: 0.3s; }
+.skills-section.portfolio-skills .skills-card ul li:nth-child(6) { animation-delay: 0.35s; }
+
+/* Subtle pulse keyframe retained but not applied on hover */
+@keyframes subtle-pulse {
+  0%, 100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+  50% { box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15); }
+}
+
+/* Loading shimmer effect for empty state */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skills-section.portfolio-skills .skills-card.loading .skill-row {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Focus states for accessibility */
+.skills-section.portfolio-skills .skill-row:focus-visible {
+  outline: 2px solid rgba(102, 126, 234, 0.8);
+  outline-offset: 2px;
+}
+
+/* Scroll reveal enhancement */
+.skills-section.portfolio-skills .skills-card {
+  opacity: 0;
+  transform: translateY(30px) rotateX(5deg);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.skills-section.portfolio-skills.show .skills-card {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .skills-section.portfolio-skills .skills-card,
+  .skills-section.portfolio-skills .skill-row,
+  .skills-section.portfolio-skills .skills-title {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Fix for very large screens (4K and above) */
+@media (min-width: 2000px) {
+  .skills-section.portfolio-skills .skills-container {
+    max-width: 1800px;
+  }
+  
+  .skills-section.portfolio-skills .skills-card {
+    min-height: 400px;
+  }
+  
+  .skills-section.portfolio-skills .skill-row {
+    min-height: 70px;
+  }
+  
+  .skills-section.portfolio-skills .skill-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .skills-section.portfolio-skills .skill-name {
+    font-size: 1.1rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .skills-section.portfolio-skills .skills-card:hover {
+    transform: none;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .skills-section.portfolio-skills .skill-row:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .skills-section.portfolio-skills .skill-row:active {
+    background: rgba(102, 126, 234, 0.15);
+  }
+}
+
+/* Ensure content doesn't overflow on very small screens */
+.skills-section.portfolio-skills * {
+  max-width: 100%;
+}
+
+/* Fix for iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  .skills-section.portfolio-skills {
+    min-height: -webkit-fill-available;
+  }
+}

@@ -22,6 +22,10 @@ const Nav = () => {
             <ul className={menuOpen ? "open" : ""}>
                 <Link to="home" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>Home</li></Link>
                 <Link to="about-section" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>About</li></Link>
+
+                {/* New Skills link (matches Skills section id="skills") */}
+                <Link to="skills" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>Skills</li></Link>
+
                 <Link to="projects" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>Projects</li></Link>
                 <Link to="contact-section" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>Contact</li></Link>
             </ul>

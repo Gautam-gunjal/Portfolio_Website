@@ -24,39 +24,63 @@
   pointer-events: none;
   z-index: 0;
 }
+
 #projects::before {
   width: 360px;
   height: 360px;
   top: -80px;
   left: -80px;
-  background: linear-gradient(135deg, rgba(255,132,122,0.9), rgba(255,202,101,0.9));
+  background: linear-gradient(135deg, rgba(255, 132, 122, 0.9), rgba(255, 202, 101, 0.9));
 }
+
 #projects::after {
   width: 360px;
   height: 360px;
   bottom: -80px;
   right: -80px;
-  background: linear-gradient(135deg, rgba(79,209,197,0.9), rgba(136,180,255,0.9));
+  background: linear-gradient(135deg, rgba(79, 209, 197, 0.9), rgba(136, 180, 255, 0.9));
 }
 
 /* heading */
 #projects h1 {
   font-size: 3.5vmax;
-  margin: 0;
   font-weight: 800;
-  letter-spacing: 0.6px;
-  z-index: 2;
-  background: linear-gradient(to right, rgb(56, 142, 222), rgb(211, 192, 192));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  margin-bottom: 4rem;
+  position: relative;
   text-align: center;
-  position: relative;            
-  z-index: 5;                    
-  -webkit-text-fill-color: transparent; 
-  background-clip: text;
+  background: linear-gradient(
+    90deg,
+    #667eea,
+    #764ba2,
+    #f093fb,
+    #f5576c,
+    #667eea
+  );
+  background-size: 300% 300%;
   -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite;
+  padding: 0.5rem 2rem;
+  letter-spacing: -0.02em;
+  position: relative;
 }
+
+#projects h1::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  opacity: 0.95;
+  box-shadow: 0 6px 18px rgba(102, 126, 234, 0.12);
+  pointer-events: none;
+}
+
 
 /* ---------- 2x2 grid ---------- */
 .projects-grid-2x2 {
@@ -68,7 +92,9 @@
   gap: 26px;
   align-items: start;
   z-index: 2;
-  margin: 0 auto; /* ✅ added: center grid container */
+  margin: 0 auto;
+  /* ✅ added: center grid container */
+  justify-items: anchor-center
 }
 
 /* wrapper holds perspective for inner card transforms */
@@ -79,14 +105,15 @@
   transition: box-shadow 0.18s ease;
   will-change: transform, opacity;
   z-index: 2;
-  perspective: 1000px; /* enables 3D tilt on inner */
+  perspective: 1000px;
+  /* enables 3D tilt on inner */
   width: fit-content;
 }
 
 /* inner element receives rotations & scale */
 .card-inner {
   transform-style: preserve-3d;
-  transition: transform 0.45s cubic-bezier(.2,.9,.2,1), box-shadow 0.25s ease;
+  transition: transform 0.45s cubic-bezier(.2, .9, .2, 1), box-shadow 0.25s ease;
   border-radius: inherit;
   overflow: hidden;
   background: transparent;
@@ -99,14 +126,14 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  box-shadow: 0 6px 18px rgba(2,8,23,0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  box-shadow: 0 6px 18px rgba(2, 8, 23, 0.45);
   pointer-events: none;
   z-index: 0;
 }
 
 /* ensure Card content sits above overlay */
-.card-wrapper > .card-inner > * {
+.card-wrapper>.card-inner>* {
   position: relative;
   z-index: 2;
   border-radius: inherit;
@@ -122,9 +149,11 @@
 
 /* responsive: stack on small screens (disable tilt shift) */
 @media (max-width: 1024px) {
+
   /* ✅ added: tablet adjustment */
   .projects-grid-2x2 {
-    width: 90%; /* wider on tablet */
+    width: 90%;
+    /* wider on tablet */
     grid-template-columns: 1fr;
   }
 }
@@ -135,20 +164,25 @@
   }
 
   #projects h1 {
-    font-size: clamp(1.8rem, 5vw, 2.5rem); /* ✅ added: scale heading */
-    margin-bottom: 1.5rem; /* ✅ added: breathing space below heading */
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    /* ✅ added: scale heading */
+    margin-bottom: 1.5rem;
+    /* ✅ added: breathing space below heading */
   }
 
   .projects-grid-2x2 {
-    width: 100%; /* ✅ updated: full width */
+    width: 100%;
+    /* ✅ updated: full width */
     grid-template-columns: 1fr;
     gap: 18px;
-    padding: 0 8px; /* ✅ added: side padding to prevent edge touch */
+    padding: 0 8px;
+    /* ✅ added: side padding to prevent edge touch */
   }
 
   .card-wrapper {
     perspective: none;
-    margin: 0 auto; /* ✅ added: center cards */
+    margin: 0 auto;
+    /* ✅ added: center cards */
   }
 
   .card-inner {
@@ -158,7 +192,7 @@
   .card-wrapper:hover .card-inner,
   .card-wrapper:focus-within .card-inner {
     transform: none;
-    box-shadow: 0 18px 36px rgba(2,8,23,0.36);
+    box-shadow: 0 18px 36px rgba(2, 8, 23, 0.36);
   }
 }
 
@@ -178,6 +212,7 @@
   #projects h1 {
     font-size: 1.4rem;
   }
+
   .projects-grid-2x2 {
     gap: 12px;
     padding: 0 6px;
@@ -203,4 +238,3 @@
     justify-content: center;
   }
 }
-

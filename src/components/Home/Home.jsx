@@ -76,7 +76,7 @@ export const Home = () => {
           <div className='line3' ref={line3Ref}>Passionate About</div>
           <div className='line4' ref={line4Ref}>
             <TypingEffect
-              text={["WEB DEVELOPMENT", "FRONTEND DEVELOPMENT","FULLSTACK DEVELOPMENT"]}
+              text={["WEB DEVELOPMENT", "FRONTEND DEVELOPMENT", "FULLSTACK DEVELOPMENT"]}
               speed={80}
               typingDelay={500}
               eraseSpeed={70}
@@ -87,9 +87,13 @@ export const Home = () => {
           <p className='description'>
             I specialize in building responsive, user-friendly websites
             using modern technologies like React.js, Node.js, and Express.          </p>
-          <button className="cta-button" onClick={() => window.open("https://drive.google.com/file/d/1lAcyCtk65E3BCANOmLfqIS8_7BPkkso8/view?usp=drivesdk", "_blank", "noopener noreferrer")}>
+          <button
+            className="cta-button"
+            onClick={() => window.open("/resume.pdf", "_blank")}
+          >
             Check Resume
           </button>
+
         </div>
       </div>
       <div className='righthome' ref={rightRef}>
