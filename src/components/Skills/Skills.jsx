@@ -39,6 +39,10 @@ const Skills = () => {
 
     gsap.registerPlugin(ScrollTrigger);
     
+    // Capture cards at setup time and store listeners for cleanup
+    const cards = cardsRef.current ? Array.from(cardsRef.current) : [];
+    const listeners = [];
+
     const ctx = gsap.context(() => {
       // Title animation with 3D effect
       gsap.from(titleRef.current, {
@@ -58,7 +62,9 @@ const Skills = () => {
       });
 
       // Enhanced card animations with 3D effects
-      cardsRef.current.forEach((card, index) => {
+      cards.forEach((card, index) => {
+        if (!card) return;
+
         // Card entry animation
         gsap.from(card, {
           scrollTrigger: {
@@ -78,24 +84,29 @@ const Skills = () => {
           ease: "power3.out",
         });
 
-        // Card hover animation (still no movement, just visual effects)
-        card.addEventListener("mouseenter", () => {
+        // Create stable handlers so cleanup removes the same functions
+        const enterHandler = () => {
           gsap.to(card, {
             scale: 1.02,
             boxShadow: "0 25px 50px rgba(102, 126, 234, 0.25)",
             duration: 0.3,
             ease: "power2.out",
           });
-        });
+        };
 
-        card.addEventListener("mouseleave", () => {
+        const leaveHandler = () => {
           gsap.to(card, {
             scale: 1,
             boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
             duration: 0.3,
             ease: "power2.out",
           });
-        });
+        };
+
+        card.addEventListener("mouseenter", enterHandler);
+        card.addEventListener("mouseleave", leaveHandler);
+
+        listeners.push({ card, enterHandler, leaveHandler });
       });
 
       // Staggered skill item animations with 3D rotation
@@ -187,11 +198,11 @@ const Skills = () => {
       ctx.revert();
       ScrollTrigger.getAll().forEach((t) => t.kill());
       
-      // Clean up event listeners
-      cardsRef.current.forEach(card => {
+      // Remove the exact handlers we attached earlier
+      listeners.forEach(({ card, enterHandler, leaveHandler }) => {
         if (card) {
-          card.removeEventListener("mouseenter", () => {});
-          card.removeEventListener("mouseleave", () => {});
+          card.removeEventListener("mouseenter", enterHandler);
+          card.removeEventListener("mouseleave", leaveHandler);
         }
       });
     };
