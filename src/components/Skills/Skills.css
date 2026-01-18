@@ -84,6 +84,9 @@
 
 /* Grid container with staggered animation */
 .skills-section.portfolio-skills .skills-container {
+  /* NOTE: width behavior below is tuned to match your projects layout logic.
+     Desktop uses a centered container narrower than full width; smaller screens become full-width. */
+  width: 64%;
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
@@ -93,6 +96,7 @@
   perspective: 1000px;
   width: 100%;
   box-sizing: border-box;
+  justify-items: center; /* center cards inside grid cells */
 }
 
 /* Enhanced card design with glass morphism */
@@ -115,6 +119,12 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
+
+  /* containment and safe sizing to prevent overflow */
+  max-width: 100%;
+  min-width: 0;
+  will-change: transform, opacity;
+  perspective: 1000px;
 }
 
 /* Animated gradient border */
@@ -203,6 +213,7 @@
   gap: clamp(0.4rem, 1.2vw, 0.75rem);
   flex: 1;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Enhanced skill item with floating effect */
@@ -221,6 +232,10 @@
   min-height: 40px;
   box-sizing: border-box;
   width: 100%;
+
+  /* defensive containment */
+  min-width: 0;
+  max-width: 100%;
 }
 
 .skills-section.portfolio-skills .skill-row::before {
@@ -310,20 +325,21 @@
 
 /* Large Tablets and Small Laptops (1024px - 769px) */
 @media (max-width: 1024px) and (min-width: 769px) {
+  /* Match projects logic: on larger tablets, use 2 columns and a wider container */
   .skills-section.portfolio-skills .skills-container {
+    width: 90%;
     grid-template-columns: repeat(2, 1fr);
     max-width: 900px;
   }
-  
+
+  /* For consistency keep 'others' card full-width of grid column span if needed */
   .skills-section.portfolio-skills .skills-card.others {
-    grid-column: span 2;
-    max-width: 600px;
-    margin: 0 auto;
-    width: 100%;
+    grid-column: span 1;
+    max-width: 100%;
   }
-  
+
   .skills-section.portfolio-skills .skills-card.others ul {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -334,6 +350,8 @@
   }
   
   .skills-section.portfolio-skills .skills-container {
+    /* stack into single column like projects behavior at smaller widths */
+    width: 100%;
     grid-template-columns: 1fr;
     max-width: 600px;
     gap: clamp(1.25rem, 4vw, 1.75rem);
@@ -344,6 +362,8 @@
     min-height: auto;
     overflow: visible;
     padding: clamp(1rem, 3vw, 1.5rem);
+    margin: 0 auto; /* center single column cards */
+    width: 100%;
   }
   
   .skills-section.portfolio-skills .skills-card.others {
@@ -374,6 +394,15 @@
     height: clamp(14px, 3.5vw, 18px);
     margin-right: 0.5rem;
   }
+
+  /* On narrower tablet range, remove 3D tilt for stability like project cards */
+  .skills-section.portfolio-skills .skills-card {
+    perspective: none;
+  }
+
+  .skills-section.portfolio-skills .card-inner {
+    transition: transform 0.28s ease;
+  }
 }
 
 /* Mobile Phones (600px - 481px) */
@@ -401,6 +430,8 @@
   .skills-section.portfolio-skills .skills-card {
     padding: clamp(0.8rem, 2.5vw, 1.2rem);
     border-radius: clamp(10px, 2vw, 16px);
+    width: 100%;
+    margin: 0 auto;
   }
   
   .skills-section.portfolio-skills .skills-card h3 {
@@ -423,6 +454,11 @@
     width: clamp(12px, 3vw, 16px);
     height: clamp(12px, 3vw, 16px);
     margin-right: 0.4rem;
+  }
+
+  /* Force single column list if space is tight (prevents overflow) */
+  .skills-section.portfolio-skills .skills-card ul {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -448,6 +484,7 @@
     padding: clamp(0.7rem, 2vw, 1rem);
     border-radius: clamp(8px, 1.5vw, 12px);
     min-height: auto;
+    width: 100%;
   }
   
   .skills-section.portfolio-skills .skills-card ul {
@@ -762,5 +799,218 @@
 @supports (-webkit-touch-callout: none) {
   .skills-section.portfolio-skills {
     min-height: -webkit-fill-available;
+  }
+}
+
+/* ===== HARD FIX FOR MOBILE OVERFLOW ===== */
+@media (max-width: 768px) {
+  .skills-section.portfolio-skills .skills-card ul {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .skills-section.portfolio-skills .skill-row {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+}
+
+/* ============================
+   MOBILE RESOLVE: Force containment + disable 3D transforms
+   (defensive overrides, similar logic to project.css)
+   ============================ */
+
+/* Always ensure the section doesn't allow horizontal overflow */
+.skills-section.portfolio-skills {
+  box-sizing: border-box;
+  overflow-x: hidden !important;
+}
+
+/* Make sure container padding won't force horizontal scroll on small viewports */
+.skills-section.portfolio-skills .skills-container {
+  padding-left: min(4vw, 20px) !important;
+  padding-right: min(4vw, 20px) !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* Clip any transformed children (stronger containment) */
+.skills-section.portfolio-skills .skills-card {
+  overflow: hidden !important;
+  position: relative !important;
+  -webkit-transform-style: flat !important;
+  transform-style: flat !important;
+  backface-visibility: hidden !important;
+  will-change: auto !important;
+  max-width: 100% !important;
+}
+
+/* Prevent the skill list from using grid columns on small screens */
+@media (max-width: 900px) {
+  .skills-section.portfolio-skills .skills-card ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    align-items: stretch !important;
+  }
+
+  /* Ensure each chip is full width and wraps safely */
+  .skills-section.portfolio-skills .skill-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    box-sizing: border-box !important;
+    padding-left: 0.6rem !important;
+    padding-right: 0.6rem !important;
+  }
+
+  .skills-section.portfolio-skills .skills-card {
+    padding-left: clamp(12px, 3vw, 20px) !important;
+    padding-right: clamp(12px, 3vw, 20px) !important;
+  }
+}
+
+/* On very small phones, fully disable transform/rotation so nothing escapes */
+@media (max-width: 480px) {
+  /* Remove any 3D rotation/translation used by GSAP visually */
+  .skills-section.portfolio-skills .skills-card,
+  .skills-section.portfolio-skills .skills-card * ,
+  .skills-section.portfolio-skills .skill-row,
+  .skills-section.portfolio-skills .skills-title {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    rotation: 0 !important;
+    -webkit-transform: none !important;
+    -webkit-transform-style: flat !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    will-change: auto !important;
+  }
+
+  /* Tighter padding for tiny screens */
+  .skills-section.portfolio-skills {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* Ensure skill icons don't force overflow */
+  .skills-section.portfolio-skills .skill-icon {
+    max-width: 18px !important;
+    max-height: 18px !important;
+    margin-right: 0.4rem !important;
+  }
+
+  /* Use single column inside cards */
+  .skills-section.portfolio-skills .skills-card ul {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Extra: defensive rule to prevent any child from overflowing horizontally */
+.skills-section.portfolio-skills * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Extra: ensure card pseudo-element doesn't expand width */
+.skills-section.portfolio-skills .skills-card::before {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* ======================================================================
+   FINAL LAYOUT TUNING (applies project.css width & breakpoint rules)
+   - Desktop uses 64% page-width container like projects-grid-2x2
+   - Tablet (769–1024px) uses 2 columns and ~90% width
+   - Small screens (<=768px) collapse to single column and center cards
+   ====================================================================== */
+
+/* Desktop (default) already set above (64% container, 3-column grid).
+   Ensure each card cell centers its contents and cards remain full width of cell. */
+.skills-section.portfolio-skills .skills-container {
+  justify-items: center;
+}
+
+/* Make sure each card will grow to the grid cell width but never overflow */
+.skills-section.portfolio-skills .skills-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Tablet: 601px – 1024px → 2 columns (match projects logic) */
+@media (max-width: 1024px) and (min-width: 601px) {
+  .skills-section.portfolio-skills .skills-container {
+    width: 90%;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 1000px;
+    padding-left: min(4vw, 20px);
+    padding-right: min(4vw, 20px);
+  }
+}
+
+/* Mobile: <=600px → 1 column (full width) */
+@media (max-width: 600px) {
+  .skills-section.portfolio-skills .skills-container {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 8px;
+    justify-items: center;
+  }
+
+  .skills-section.portfolio-skills .skills-card {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+  }
+}
+
+/* Extra defensive: ensure skill rows NEVER force a wider layout at any width */
+.skills-section.portfolio-skills .skill-row {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+
+
+
+
+
+
+
+
+
+/* Small-screen visibility safety (paste after existing Skills.css) */
+@media (max-width: 480px) {
+  .skills-section.portfolio-skills {
+    overflow-x: hidden !important;
+  }
+
+  /* Ensure cards are visible and not hidden by transforms/opacity */
+  .skills-section.portfolio-skills .skills-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  /* Keep list layout safe (single column) */
+  .skills-section.portfolio-skills .skills-container,
+  .skills-section.portfolio-skills .skills-card ul {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
   }
 }

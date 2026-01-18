@@ -1,36 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import "./Nav.css";
 import { Link } from "react-scroll";
 
 const Nav = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    return (
-        <nav>
-            <h1>PORTFOLIO</h1>
+  return (
+    <nav className="Nav__root" aria-label="Main navigation">
+      <h1 className="Nav__title">PORTFOLIO</h1>
 
-            {/* Hamburger icon */}
-            <div
-                className={`hamburger ${menuOpen ? "open" : ""}`}
-                onClick={() => setMenuOpen(!menuOpen)}
-            >
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+      {/* Hamburger icon */}
+      <button
+        className={`Nav__hamburger hamburger ${menuOpen ? "open" : ""}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-expanded={menuOpen}
+        aria-controls="main-nav-list"
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
+      >
+        <div />
+        <div />
+        <div />
+      </button>
 
-            <ul className={menuOpen ? "open" : ""}>
-                <Link to="home" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>Home</li></Link>
-                <Link to="about-section" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>About</li></Link>
-
-                {/* New Skills link (matches Skills section id="skills") */}
-                <Link to="skills" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>Skills</li></Link>
-
-                <Link to="projects" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>Projects</li></Link>
-                <Link to="contact-section" smooth={true} duration={500} activeClass='active' spy={true} onClick={() => setMenuOpen(false)}><li>Contact</li></Link>
-            </ul>
-        </nav>
-    )
-}
+      <ul id="main-nav-list" className={menuOpen ? "open" : ""}>
+        <li>
+          <Link to="home" smooth duration={500} activeClass="nav-active" spy onClick={() => setMenuOpen(false)}>Home</Link>
+        </li>
+        <li>
+          <Link to="about-section" smooth duration={500} activeClass="nav-active" spy onClick={() => setMenuOpen(false)}>About</Link>
+        </li>
+        <li>
+          <Link to="skills" smooth duration={500} activeClass="nav-active" spy onClick={() => setMenuOpen(false)}>Skills</Link>
+        </li>
+        <li>
+          <Link to="projects" smooth duration={500} activeClass="nav-active" spy onClick={() => setMenuOpen(false)}>Projects</Link>
+        </li>
+        <li>
+          <Link to="contact-section" smooth duration={500} activeClass="nav-active" spy onClick={() => setMenuOpen(false)}>Contact</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
 export default Nav;

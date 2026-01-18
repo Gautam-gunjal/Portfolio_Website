@@ -25,6 +25,16 @@ const About = () => {
         ease: "power3.out"
       });
     });
+
+    return () => {
+      // Clean up ScrollTrigger instances and any tweens created for these elements
+      try {
+        ScrollTrigger.getAll().forEach(t => t.kill());
+      } catch (e) {
+        // safe fallback if ScrollTrigger isn't available for some reason
+      }
+      gsap.killTweensOf(cardsRef.current);
+    };
   }, []);
 
   return (
@@ -43,7 +53,7 @@ const About = () => {
               ref={(el) => (cardsRef.current[1] = el)}
             >
               <div className="content">
-                <h2><FaLaptopCode className="icon" /> Internship</h2>
+                <h2><FaLaptopCode className="icon" aria-hidden="true" /> Internship</h2>
                 <p className="subtitle">Professional Development Journey</p>
                 <h3>Java Full Stack Development Intern</h3>
                 <p className="location">Profound Edutech, Pune | Jul 2024 – Feb 2025</p>
@@ -61,7 +71,7 @@ const About = () => {
               ref={(el) => (cardsRef.current[3] = el)}
             >
               <div className="content">
-                <h2><FaLaptopCode className="icon" /> Internship</h2>
+                <h2><FaLaptopCode className="icon" aria-hidden="true" /> Internship</h2>
                 <p className="subtitle">Professional Development</p>
                 <h3>Full-Stack Web Developer Intern</h3>
                 <p className="location">Zidio Development | Sep 2025 – Dec 2025</p>
@@ -87,7 +97,7 @@ const About = () => {
               ref={(el) => (cardsRef.current[0] = el)}
             >
               <div className="content">
-                <h2><FaCertificate className="icon" /> Certification</h2>
+                <h2><FaCertificate className="icon" aria-hidden="true" /> Certification</h2>
                 <p className="subtitle">Professional Qualifications</p>
                 <h3>Master Diploma in Full Stack Java Development</h3>
                 <p className="location">Profound Edutech, Pune</p>
@@ -104,7 +114,7 @@ const About = () => {
               ref={(el) => (cardsRef.current[2] = el)}
             >
               <div className="content">
-                <h2><FaCertificate className="icon" /> Certification</h2>
+                <h2><FaCertificate className="icon" aria-hidden="true" /> Certification</h2>
                 <p className="subtitle">Professional Qualifications</p>
                 <h3>Web Development Training</h3>
                 <p className="location">Zidio Development | 01 Sep 2025 – 01 Dec 2025</p>

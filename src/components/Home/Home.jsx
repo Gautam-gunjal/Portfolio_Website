@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import "./Home.css";
 import man from "../../assets/360_F_1166587468_ZopHWl13KwyUV9w2fQiQxO2M29gkDKDB-removebg-preview.png";
+import githubImg from "../../assets/icons/Home_Github.svg";
+import linkedinImg from "../../assets/icons/linkedin.svg";
 import TypingEffect from "react-typing-effect";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -86,13 +88,38 @@ export const Home = () => {
           </div>
           <p className='description'>
             I specialize in building responsive, user-friendly websites
-            using modern technologies like React.js, Node.js, and Express.          </p>
-          <button
-            className="cta-button"
-            onClick={() => window.open("/resume.pdf", "_blank")}
-          >
-            Check Resume
-          </button>
+            using modern technologies like React.js, Node.js, and Express.
+          </p>
+                   <div className="cta-wrapper">
+            <button
+              className="cta-button"
+              onClick={() => window.open("/resume.pdf", "_blank")}
+            >
+              Check Resume
+            </button>
+
+            {/* Social links (GitHub + LinkedIn) — replace href values with your profiles */}
+            <div className="social-links" aria-hidden="false">
+              <a
+                href="https://github.com/Gautam-gunjal"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub profile"
+              >
+                <img src={githubImg} alt="GitHub profile" className="social-icon" />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/gautam-gunjal-2421aa363/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn profile"
+              >
+                <img src={linkedinImg} alt="LinkedIn profile" className="social-icon" />
+              </a>
+            </div>
+          </div>
+
 
         </div>
       </div>

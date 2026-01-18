@@ -1,28 +1,38 @@
-/* --- start: updated About.css (responsive improvements only) --- */
+/* Scoped About component CSS
+   - Fully namespaced to .about-section to prevent leakage
+   - Animation names and CSS variables are prefixed with "about-" to avoid global collisions
+   - Safe to drop into your existing stylesheet (or keep as a component-level CSS file)
+*/
 
-:root{
-  --max-content-width: 1150px;
-  --col-line-left-default: 40px;
-  --col-padding-default: 90px;
-  --dot-size: 22px;
-  --dot-radius: calc(var(--dot-size) / 2);
-  box-sizing: border-box;
-}
-
-/* make box-sizing predictable */
-*, *::before, *::after { box-sizing: inherit; }
-
+/* Component-level variables and containment */
 .about-section {
-  padding: clamp(1.25rem, 3vw, 3rem) clamp(1rem, 3vw, 1.5rem);
+  --about-max-content-width: 1150px;
+  --about-col-line-left-default: 40px;
+  --about-col-padding-default: 90px;
+  --about-dot-size: 22px;
+  --about-dot-radius: calc(var(--about-dot-size) / 2);
+
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 3vw, 3rem) clamp(1rem, 0vw, 1.5rem);
   font-family: 'Poppins', sans-serif;
   position: relative;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 100vh;
+  margin-bottom: 80px;
 }
 
-/* fluid title sizing */
-.about-title {
+/* Make box-sizing predictable inside component only */
+.about-section,
+.about-section * ,
+.about-section *::before,
+.about-section *::after {
+  box-sizing: inherit;
+}
+
+/* Title */
+.about-section .about-title {
   font-size: clamp(1.75rem, 3.5vmax, 3.5vmax);
   font-weight: 700;
   margin-bottom: clamp(2rem, 4vw, 4rem);
@@ -40,12 +50,12 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient-shift 8s ease infinite;
+  animation: about-gradient-shift 8s ease infinite;
   padding: 0.5rem 2rem;
   letter-spacing: -0.02em;
 }
 
-.about-title::after {
+.about-section .about-title::after {
   content: '';
   position: absolute;
   bottom: -0.5rem;
@@ -65,31 +75,31 @@
   pointer-events: none;
 }
 
-/* Two-column timeline layout with fluid gap */
-.two-column-timeline {
+/* Two-column timeline layout */
+.about-section .two-column-timeline {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(20px, 3vw, 40px);
-  max-width: var(--max-content-width);
+  max-width: var(--about-max-content-width);
   margin: 0 auto;
   align-items: start;
   position: relative;
   width: 100%;
 }
 
-/* Column wrapper variables are adjusted per breakpoint below */
-.column {
+/* Column wrapper variables (scoped) */
+.about-section .column {
   position: relative;
-  --col-line-left: var(--col-line-left-default);
-  --col-padding: var(--col-padding-default);
-  padding-left: var(--col-padding);
+  --about-col-line-left: var(--about-col-line-left-default);
+  --about-col-padding: var(--about-col-padding-default);
+  padding-left: var(--about-col-padding);
 }
 
-/* Vertical line for each column (kept visual style but responsive) */
-.column::before {
+/* Column vertical line */
+.about-section .column::before {
   content: '';
   position: absolute;
-  left: var(--col-line-left);
+  left: var(--about-col-line-left);
   top: 0;
   bottom: 0;
   width: 6px;
@@ -102,8 +112,8 @@
   z-index: 0;
 }
 
-/* Column header */
-.column-title {
+/* Column title */
+.about-section .column-title {
   font-size: clamp(1.05rem, 1.6vw, 1.5rem);
   font-weight: 700;
   background: linear-gradient(90deg, white, #38bdf8);
@@ -114,7 +124,7 @@
   text-align-last: center;
 }
 
-.column-title::after {
+.about-section .column-title::after {
   content: '';
   display: block;
   width: 60px;
@@ -124,11 +134,11 @@
   border-radius: 3px;
 }
 
-/* Column inner holds stacked timeline cards */
-.column-inner { position: relative; }
+/* Column inner */
+.about-section .column-inner { position: relative; }
 
-/* Card sizing: fluid padding and spacing */
-.timeline-card {
+/* Timeline card */
+.about-section .timeline-card {
   position: relative;
   width: 100%;
   padding: clamp(1rem, 1.5vw, 1.5rem) clamp(0.75rem, 1.2vw, 1rem);
@@ -137,12 +147,12 @@
   text-align: left;
 }
 
-/* Keep left/right classes for animation logic (no style changes) */
-.timeline-card.left {}
-.timeline-card.right {}
+/* Keep classes present for JS/animation logic */
+.about-section .timeline-card.left {}
+.about-section .timeline-card.right {}
 
-/* Card content visuals (kept but with fluid padding) */
-.timeline-card .content {
+/* Card content visuals (scoped) */
+.about-section .timeline-card .content {
   background: linear-gradient(135deg, #1e293b, #0f172a);
   padding: clamp(1rem, 2vw, 2rem);
   border-radius: 20px;
@@ -154,8 +164,8 @@
   overflow: hidden;
 }
 
-/* Glowing gradient border effect (unchanged) */
-.timeline-card .content::before {
+/* Scoped glowing border pseudo */
+.about-section .timeline-card .content::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -167,22 +177,17 @@
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: glowingBorder 6s ease infinite;
+  animation: about-glowingBorder 6s ease infinite;
 }
 
-@keyframes glowingBorder {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.timeline-card:hover .content {
+/* Hover transforms (scoped) */
+.about-section .timeline-card:hover .content {
   transform: translateY(-10px) scale(1.02);
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5);
 }
 
-/* Headings inside each card */
-.timeline-card h2 {
+/* Headings inside cards */
+.about-section .timeline-card h2 {
   font-size: clamp(1.1rem, 1.6vw, 1.6rem);
   margin-bottom: 0.5rem;
   color: #f8fafc;
@@ -193,51 +198,49 @@
   letter-spacing: 1px;
 }
 
-.timeline-card h2 .icon {
+.about-section .timeline-card h2 .icon {
   font-size: clamp(1rem, 1.6vw, 1.4rem);
   color: #38bdf8;
 }
 
 /* Subtitle */
-.timeline-card .subtitle {
+.about-section .timeline-card .subtitle {
   font-size: clamp(0.85rem, 1.2vw, 0.95rem);
   color: #94a3b8;
   margin-bottom: 1rem;
 }
 
 /* h3 */
-.timeline-card h3 {
+.about-section .timeline-card h3 {
   font-size: clamp(1rem, 1.2vw, 1.2rem);
   color: #e2e8f0;
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
-/* Location text */
-.timeline-card .location {
+/* Location */
+.about-section .timeline-card .location {
   font-size: clamp(0.85rem, 1vw, 0.95rem);
   color: #38bdf8;
   margin-bottom: 1rem;
   font-weight: 500;
 }
 
-/* Paragraph text */
-.timeline-card p:not(.subtitle):not(.location) {
+/* Paragraphs */
+.about-section .timeline-card p:not(.subtitle):not(.location) {
   font-size: clamp(0.85rem, 1.1vw, 0.95rem);
   line-height: 1.7;
   color: #cbd5e1;
 }
 
-/* Dot that sits beside each card:
-   Calculated with variables so it repositions correctly across breakpoints.
-*/
-.timeline-card::before {
+/* Dot beside each card (scoped variables) */
+.about-section .timeline-card::before {
   content: "";
   position: absolute;
   top: 24px;
-  left: calc(var(--col-line-left) - var(--dot-radius) - var(--col-padding));
-  width: var(--dot-size);
-  height: var(--dot-size);
+  left: calc(var(--about-col-line-left) - var(--about-dot-radius) - var(--about-col-padding));
+  width: var(--about-dot-size);
+  height: var(--about-dot-size);
   border-radius: 50%;
   background: linear-gradient(135deg, #6a11cb, #2575fc);
   border: 3px solid #fff;
@@ -246,104 +249,129 @@
   transition: all 0.3s ease;
 }
 
-.timeline-card:hover::before {
+.about-section .timeline-card:hover::before {
   transform: scale(1.2);
   box-shadow: 0 0 0 6px rgba(106, 17, 203, 0.3);
 }
 
-/* Responsive breakpoints: large laptops and below */
+/* -----------------------------
+   Responsive breakpoints (scoped)
+   ----------------------------- */
 
-/* Large screens - keep generous padding but allow scaling */
+/* Large screens scaling */
 @media (max-width: 1280px) {
-  :root {
-    --col-padding-default: 80px;
-    --col-line-left-default: 36px;
+  .about-section {
+    --about-col-padding-default: 80px;
+    --about-col-line-left-default: 36px;
   }
 }
 
-/* Medium screens - tablet and small laptops */
+/* Medium screens */
 @media (max-width: 1024px) {
-  .two-column-timeline {
+  .about-section .two-column-timeline {
     gap: clamp(18px, 4vw, 30px);
   }
-  :root {
-    --col-padding-default: 72px;
-    --col-line-left-default: 34px;
+  .about-section {
+    --about-col-padding-default: 72px;
+    --about-col-line-left-default: 34px;
   }
 }
 
-/* Tablet / small tablet - use single-column for clarity */
+/* Tablet -> single column for clarity */
 @media (max-width: 900px) {
-  .two-column-timeline {
+  .about-section .two-column-timeline {
     grid-template-columns: 1fr;
   }
 
-  /* Move column lines closer and reduce left padding */
-  .column {
-    --col-line-left: 28px;
-    --col-padding: 60px;
-    padding-left: var(--col-padding);
+  .about-section .column {
+    --about-col-line-left: 28px;
+    --about-col-padding: 60px;
+    padding-left: var(--about-col-padding);
   }
 
-  .timeline-card::before {
+  .about-section .timeline-card::before {
     top: 20px;
-    left: calc(var(--col-line-left) - var(--dot-radius) - var(--col-padding));
+    left: calc(var(--about-col-line-left) - var(--about-dot-radius) - var(--about-col-padding));
   }
 
-  .about-title { margin-bottom: clamp(1.25rem, 3vw, 2.5rem); }
+  .about-section .about-title { margin-bottom: clamp(1.25rem, 3vw, 2.5rem); }
 }
 
-/* Small phones and narrow screens */
+/* Small phones */
 @media (max-width: 480px) {
   .about-section {
     padding: 1.25rem 0.75rem;
   }
 
-  .about-title {
+  .about-section .about-title {
     font-size: clamp(1.25rem, 6vw, 2.5rem);
     padding: 0.35rem 1rem;
   }
 
-  .column {
-    --col-line-left: 20px;
-    --col-padding: 48px;
-    padding-left: var(--col-padding);
+  .about-section .column {
+    --about-col-line-left: 20px;
+    --about-col-padding: 48px;
+    padding-left: var(--about-col-padding);
   }
 
-  .column::before { left: var(--col-line-left); }
+  .about-section .column::before { left: var(--about-col-line-left); }
 
-  .timeline-card {
+  .about-section .timeline-card {
     padding: 0.85rem 0.6rem;
     margin-bottom: 1.25rem;
   }
 
-  .timeline-card .content { padding: 1rem; border-radius: 14px; }
-  .timeline-card::before {
+  .about-section .timeline-card .content { padding: 1rem; border-radius: 14px; }
+  .about-section .timeline-card::before {
     top: 18px;
-    left: calc(var(--col-line-left) - var(--dot-radius) - var(--col-padding));
+    left: calc(var(--about-col-line-left) - var(--about-dot-radius) - var(--about-col-padding));
     width: 18px;
     height: 18px;
   }
 }
 
-/* Extra small narrow devices (very small widths e.g., old phones) */
+/* Extra small */
 @media (max-width: 360px) {
-  .column {
-    --col-padding: 36px;
-    --col-line-left: 18px;
-    padding-left: var(--col-padding);
+  .about-section .column {
+    --about-col-padding: 36px;
+    --about-col-line-left: 18px;
+    padding-left: var(--about-col-padding);
   }
 
-  .timeline-card h2 { gap: 0.45rem; }
-  .timeline-card h2 .icon { font-size: 1rem; }
-  .timeline-card .content { padding: 0.85rem; border-radius: 12px; }
-  .timeline-card::before { left: calc(var(--col-line-left) - var(--dot-radius) - var(--col-padding)); top: 14px; }
+  .about-section .timeline-card h2 { gap: 0.45rem; }
+  .about-section .timeline-card h2 .icon { font-size: 1rem; }
+  .about-section .timeline-card .content { padding: 0.85rem; border-radius: 12px; }
+  .about-section .timeline-card::before { left: calc(var(--about-col-line-left) - var(--about-dot-radius) - var(--about-col-padding)); top: 14px; }
 }
 
-/* Ensure large displays don't overly stretch content */
+/* Large display safety */
 @media (min-width: 1400px) {
   .about-section { max-width: 1400px; padding-left: clamp(2rem, 2.5vw, 4rem); padding-right: clamp(2rem, 2.5vw, 4rem); }
-  .two-column-timeline { gap: clamp(28px, 2.5vw, 56px); }
+  .about-section .two-column-timeline { gap: clamp(28px, 2.5vw, 56px); }
 }
 
-/* --- end: updated About.css (responsive improvements only) --- */
+/* Reduced motion (scoped) */
+@media (prefers-reduced-motion: reduce) {
+  .about-section *,
+  .about-section *::before,
+  .about-section *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* -----------------------------
+   Prefixed keyframes (scoped names)
+   ----------------------------- */
+
+@keyframes about-glowingBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes about-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
