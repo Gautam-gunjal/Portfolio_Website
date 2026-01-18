@@ -11,7 +11,9 @@ const About = () => {
   const cardsRef = useRef([]);
 
   useEffect(() => {
-    cardsRef.current.forEach((el, index) => {
+    const cards = cardsRef.current.slice(); // snapshot the ref array
+
+    cards.forEach((el, index) => {
       if (!el) return;
       gsap.from(el, {
         scrollTrigger: {
@@ -33,7 +35,7 @@ const About = () => {
       } catch (e) {
         // safe fallback if ScrollTrigger isn't available for some reason
       }
-      gsap.killTweensOf(cardsRef.current);
+      gsap.killTweensOf(cards); // use the snapshot, not cardsRef.current
     };
   }, []);
 
