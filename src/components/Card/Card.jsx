@@ -1,9 +1,9 @@
 import React from "react";
 import "./Card.css";
 
-const Card = ({ title, image, description, technologies, liveLink }) => {
+const Card = ({ title, image, description, technologies = [], codeLink, liveLink }) => {
   return (
-    <div className="card">
+    <div className="card" role="article" aria-label={title}>
       <div className="card-image-wrapper">
         <img src={image} alt={title} className="card-image" />
       </div>
@@ -11,7 +11,7 @@ const Card = ({ title, image, description, technologies, liveLink }) => {
       <div className="card-content">
         <h2 className="card-title">{title}</h2>
 
-        <p className="card-description">{description}</p>
+        <p className="card-description" style={{ whiteSpace: "pre-line" }}>{description}</p>
 
         <div className="card-technologies">
           {technologies.map((tech, index) => (
@@ -21,15 +21,32 @@ const Card = ({ title, image, description, technologies, liveLink }) => {
           ))}
         </div>
 
-        <button
-          className="view-live-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            window.open(liveLink, "_blank");
-          }}
-        >
-          🚀 View Code
-        </button>
+        {/* Buttons row */}
+        <div className="card-buttons">
+          {codeLink && (
+            <a
+              className="view-live-btn"
+              href={codeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              💻 View Code
+            </a>
+          )}
+
+          {liveLink && (
+            <a
+              className="view-live-btn"
+              href={liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              🚀 View Live
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );

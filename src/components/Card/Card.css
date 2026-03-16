@@ -152,9 +152,9 @@
   box-shadow: 0 6px 12px rgba(99, 102, 241, 0.2);
 }
 
-/* View live button */
+/* View live button - adjusted for flexible layout */
 .view-live-btn {
-  width: 100%;
+  /* remove fixed full width so buttons can sit side-by-side */
   padding: 14px;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
@@ -167,12 +167,16 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+   text-decoration: none;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
+/* keep the shine effect */
 .view-live-btn::before {
   content: '';
   position: absolute;
@@ -197,6 +201,32 @@
 
 .view-live-btn:hover::before {
   left: 100%;
+}
+
+/* Buttons container (new) */
+.card-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Make anchors behave like buttons when used inside container */
+.card-buttons .view-live-btn {
+  /* ensure equal widths when two buttons are present */
+  flex: 1 1 0;
+}
+
+/* Responsive: stack buttons on small screens */
+@media (max-width: 420px) {
+  .card-buttons {
+    flex-direction: column;
+  }
+  .card-buttons .view-live-btn {
+    width: 100%;
+  }
 }
 
 /* Pulse animation */

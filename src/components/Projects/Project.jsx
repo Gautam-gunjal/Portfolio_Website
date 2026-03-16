@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import a1 from "../../assets/AI-Code-Review.png.webp";
-import r1 from "../../assets/images.jpg";
+import r1 from "../../assets/Food-reel.jpg";
 import c1 from "../../assets/DALL·E-2023-11-23-18.37.12-A-vector-art-landscape-image-depicting-the-concept-of-AI-in-gaming.-The-scene-includes-various-classic-game-pieces-such-as-chess-pieces-poker-cards-.png";
 import e1 from "../../assets/excel analysis.jpg";
 
@@ -158,10 +158,11 @@ const Project = () => {
             <Card
               title="AI-Code-Reviewer"
               image={a1}
-              description="• Engineered an AI-powered code review platform providing real-time feedback for improving code quality.  
-           • Integrated Google Gemini API to perform intelligent code analysis and suggestions."
+              description={`• Engineered an AI-powered code review platform providing real-time feedback for improving code quality.  
+           • Integrated Google Gemini API to perform intelligent code analysis and suggestions.`}
               technologies={["React.js", "Express.js", "Node.js", "GoogleGemini API"]}
-              liveLink="https://github.com/Gautam-gunjal/Ai-CodeReviewer"
+              codeLink="https://github.com/Gautam-gunjal/Ai-CodeReviewer"
+              liveLink="https://ai-code-reviewer-beryl-nine.vercel.app/"
             />
           </div>
         </div>
@@ -173,12 +174,13 @@ const Project = () => {
         >
           <div className="card-inner">
             <Card
-              title="RealTime Device-Tracker"
+              title="Food-Reels-App"
               image={r1}
-              description="• Built a real-time location tracking system with dynamic map updates.      
-              • Optimized data transmission for low-latency streaming of device coordinates."
-              technologies={["Express.js", "Socket.io", "Node.js", "Geolocation API"]}
-              liveLink="https://github.com/Gautam-gunjal/Real-Time-Device-Tracker"
+              description={`• Built FoodReels, a MERN food video platform with ImageKit CDN uploads.
+                            • Implemented role-based auth and features like comments, likes, and saved posts.`}
+              technologies={["Express.js", "Node.js", "MongoDB", "React.js","ImageKit[Cloud-Storage]"]}
+              codeLink="https://github.com/Gautam-gunjal/Food-Reels-App"
+              liveLink='https://food-reels-app-self.vercel.app/'
             />
           </div>
         </div>
@@ -192,10 +194,11 @@ const Project = () => {
             <Card
               title="ChessGame"
               image={c1}
-              description="• Designed a real-time multiplayer chess game with move validation and rule enforcement. 
-               • Enabled seamless two-player interaction with live board updates and secure game sessions."
+              description={`•	Built a real-time multiplayer chess game with automatic player role allocation (White/Black) based on connection order. 
+               • Enabled seamless two-player interaction with live board updates and secure game sessions.`}
               technologies={["Node.js", "Express.js", "Socket.io", "Chess.js"]}
-              liveLink="https://github.com/Gautam-gunjal/ChessGame"
+              codeLink="https://github.com/Gautam-gunjal/ChessGame"
+              liveLink='https://chessgame-h1zk.onrender.com'
             />
           </div>
         </div>
@@ -209,9 +212,10 @@ const Project = () => {
             <Card
               title="Excel Analytics Platform"
               image={e1}
-              description="• Built an Excel Analytics Platform (MERN) that ingests spreadsheets, normalizes data, runs automated analyses, and presents interactive dashboards and exportable reports."
+              description={`• Built an Excel Analytics Platform (MERN) that ingests spreadsheets, normalizes data, runs automated analyses, and presents interactive dashboards and exportable reports.`}
               technologies={["MongoDB", "Express.js", "React.js", "Node.js"]}
-              liveLink="https://github.com/Gautam-gunjal/excel-analytics-platform"
+              codeLink="https://github.com/Gautam-gunjal/excel-analytics-platform"
+              liveLink='https://excel-analytics-platform-lac-eight.vercel.app/'
             />
           </div>
         </div>
