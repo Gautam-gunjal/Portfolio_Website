@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import a1 from "../../assets/AI-Code-Review.png.webp";
 import r1 from "../../assets/Food-reel.jpg";
-import c1 from "../../assets/DALL·E-2023-11-23-18.37.12-A-vector-art-landscape-image-depicting-the-concept-of-AI-in-gaming.-The-scene-includes-various-classic-game-pieces-such-as-chess-pieces-poker-cards-.png";
+import c1 from "../../assets/PrepAI.avif";
 import e1 from "../../assets/excel analysis.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -194,11 +194,10 @@ const Project = () => {
             <Card
               title="ChessGame"
               image={c1}
-              description={`•	Built a real-time multiplayer chess game with automatic player role allocation (White/Black) based on connection order. 
-               • Enabled seamless two-player interaction with live board updates and secure game sessions.`}
-              technologies={["Node.js", "Express.js", "Socket.io", "Chess.js"]}
-              codeLink="https://github.com/Gautam-gunjal/ChessGame"
-              liveLink='https://chessgame-h1zk.onrender.com'
+              description={`•	An AI-powered interview preparation platform that analyzes your resume and job description to deliver personalized interview reports, skill gap analysis, and ATS-optimized resume export.`}
+              technologies={["React.js", "Express.js", "Node.js", "MongoDB","GoogleGemini API"]}
+              codeLink="https://github.com/Gautam-gunjal/PrepAI"
+              liveLink='https://prep-ai-two-eta.vercel.app/'
             />
           </div>
         </div>
