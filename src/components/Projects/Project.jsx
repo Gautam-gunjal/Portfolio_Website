@@ -192,7 +192,7 @@ const Project = () => {
         >
           <div className="card-inner">
             <Card
-              title="ChessGame"
+              title="Prep AI"
               image={c1}
               description={`•	An AI-powered interview preparation platform that analyzes your resume and job description to deliver personalized interview reports, skill gap analysis, and ATS-optimized resume export.`}
               technologies={["React.js", "Express.js", "Node.js", "MongoDB","GoogleGemini API"]}
